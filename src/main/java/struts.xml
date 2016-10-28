@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd"> 
+    
+<struts>
+<!-- 上传配置 -->
+  <package name="user" namespace="/user1" extends="struts-default">
+     <action name="action1_*" class="com.bjsxt.action4.InterceptorAction" method="{1}"> 
+     <!-- 引用struts中的拦截器 -->
+      <interceptor-ref name="fileUpload">
+      <!-- 设置上传的文件类型和大小限制 -->
+         <param name="allowedTypes">.txt,.png</param>
+         <param name="maximumSize">5242880</param>    
+      </interceptor-ref>
+      <!-- 使用拦截器栈 这两个的顺序不能改变。 -->
+      <interceptor-ref name="defaultStack"></interceptor-ref>
+      <!-- 上传到服务器的什么位置 指定 -->
+     <param name="path">D:/websource3/upload</param>
+     <!-- 上传处理完毕后的响应视图 -->
+     <result name="success">/jsp/upsuccess.jsp</result>
+     </action>
+  
+  </package>
+  <!-- 下载配置 -->
+  <package name="down" namespace="/user2" extends="struts-default">
+     <action name="action2_*" class="com.bjsxt.action4.DownLoadAction" method="{1}">
+     <!-- 服务器上的资源地址 -->
+       <param name="path">D:/websource3/upload</param>
+       <!-- 响应结果的处理 -->
+       <result name="downgood" type="stream">
+       <!-- 响应流对象 -->
+        <param name="inputName">input</param>
+        <!-- 响应回去的文件类型  告知浏览器 -->
+        <param name="contentType">text/plain</param>
+        <!-- 这里是响应回去的文件名 -->
+        <param name="contentDisposition">attachment;filename="cheng"</param>
+       
+       </result>
+     
+     </action>
+  
+  </package>
+  <!-- 这里测试表单的重复提交 -->
+  <package name="token1" namespace="/user3" extends="struts-default">
+    <action name="action1_*" class="com.bjsxt.action5.TokenAction" method="{1}">
+    		<!-- 引入有token功能拦截器  拦截器是由顺序的-->   		
+    		<interceptor-ref name="token"></interceptor-ref>
+    		<interceptor-ref name="basicStack"></interceptor-ref>
+    		<!-- 这里的invalid.token是必须设置的。 -->
+       <result name="invalid.token">/jsp/userResp.jsp</result>  
+        <result name="tokenresult">/jsp/display.jsp</result>
+    </action> 
+  </package>
+<!-- 测试传入服务器的数据的封装、转换 、数据的校验-->
+<package name="conver" namespace="/user4" extends="struts-default">
+ <action name="action1_*" class="com.bjsxt.action6.ColorAction" method="{1}">
+    <result name="conver">/jsp/conver.jsp</result>
+ 
+ </action>
+
+</package>
+<!-- ognl表达式的使用 -->
+<package name="ognl1" namespace="/user5" extends="struts-default">
+	<action name="action1_*" class="com.bjsxt.action7.OgnlAction" method="{1}"> 	
+	   <result name="ognldisplay">/jsp/ognldisplay.jsp</result>
+</action>
+
+</package>
+
+</struts>

@@ -1,0 +1,3 @@
+1、重定向是根据url重新请求服务器资源。
+2、namespace的字符串需要添加到url请求路径中。
+3、action  name:需要和请求路径中的     username.action中的username相同。

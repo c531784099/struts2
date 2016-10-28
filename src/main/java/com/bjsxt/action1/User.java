@@ -1,0 +1,27 @@
+package com.bjsxt.action1;
+
+public class User {
+	private String name;
+	private Integer age;
+	private String upwd;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	public String getUpwd() {
+		return upwd;
+	}
+	public void setUpwd(String upwd) {
+		this.upwd = upwd;
+	}
+	
+
+}

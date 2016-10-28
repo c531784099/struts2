@@ -1,0 +1,52 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">     
+<struts>
+     <package name="user" namespace="/user" extends="struts-default">
+      <action name="userAction2_*" class="com.bjsxt.action1.UserAction2" method="{1}">
+        <result name="user">/good.jsp</result>    
+      </action>
+     </package>
+     <!-- 测试servlet  api  -->
+     <package name="userserlet" namespace="/user1" extends="struts-default">  
+      
+      <action name="action1" class="com.bjsxt.action2.Action1" >
+      <!--默认的是请求转发到jsp    type="disptcher" -->
+       <result name="servlet">/jsp/servlet.jsp</result>
+      </action>
+      <action name="action2" class="com.bjsxt.action2.Action2">
+        <result name="tcontext">/jsp/context.jsp</result>
+      </action>
+      
+      <action name="action3" class="com.bjsxt.action2.Action3">
+        <result name="map">/jsp/map.jsp</result>
+      </action>
+      <!-- 通过流来响应 -->
+      <action name="action4_*" class="com.bjsxt.action3.MessageAction4" method="{1}">
+      <!-- 这里是设置流的type 来响应客户端的请求 -->
+        <result name="ajaxResp" type="stream">
+        
+          <param name="inputName">input</param>
+          <param name="contentCharSet">GBK</param>
+          
+        </result>
+      </action>
+      
+     
+     
+     </package>
+     <!-- extends  json-default包 -->
+     <package name="user0" namespace="/user2" extends="json-default">
+     
+      <action name="action5_*" class="com.bjsxt.action3.JsonAction5" method="{1}">
+      
+         <result name="ajaxjson"  type="json">
+		             <!-- get方法的获取的值  getMesg()中的mesg字符 -->
+		         <param name="root">mesg</param>
+         
+         </result>
+      </action>
+     
+     </package>
+    
+</struts>

@@ -1,0 +1,39 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">  
+    <struts>
+    
+    <!-- name:包名  namespace:action的请求前缀 extends:继承其他的包   -->
+    <package name="user" namespace="/user1" extends="struts-default">
+    <!-- action  name:请求路径的最后一部分 -->
+      <action name="userAction" class="com.bjsxt.action.UserAction">
+        <!-- 重定向是重新请求服务器资源 不带有参数   重定向到javabean中-->
+        <result name="userAction2" type="redirectAction">userAction2</result>
+        <result name="userLogin">/login.jsp</result>
+        <!-- 重定向到jsp中 -->
+        <result name="jsp" type="redirect">/redirect.jsp</result>
+        <!-- 不同包中的跳转 -->
+        <!-- 
+        <result name="action3" type="redirectAction'">
+           <param name="actionName">userAction3</param>       
+           <param name="namespace">/user2</param>
+        </result> -->
+        
+      </action>
+    <!-- 不同action之间的跳转 -->
+    <action name="userAction2" class="com.bjsxt.action.UserAction2">
+      <result name="success" >/sucess.jsp</result>
+     <result name="userLogin">/login.jsp</result>
+    </action>  
+    </package>
+    
+    <!--  
+    <package name="user_1"  namespace="/user2" extends="struts-default">
+       <action name="userAction3" class="com.bjsxt.action.UserAction3">
+           <result name="uaction3">/uaction3.jsp</result>
+       </action>
+    
+    </package>
+    -->
+    
+    </struts>

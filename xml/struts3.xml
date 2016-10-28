@@ -1,0 +1,22 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">  
+ <struts>
+ <constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+
+  <package name="u1" namespace="/user1" extends="struts-default" >
+  <!-- 这里是 方法的动态调用 -->
+  <!-- 
+  <action name="userAction" class="com.bjsxt.action.UserAction" method="{1}">
+       <result name="good">/good.jsp</result>   
+  </action> -->
+ 
+ <!-- 这里使用  通配符调用 -->
+ 
+ <action name="userAction_*" class="com.bjsxt.action.UserAction" method="{1}">
+   <result name="good">/good.jsp</result>
+ </action>
+ 
+ </package>
+ 
+ </struts>
